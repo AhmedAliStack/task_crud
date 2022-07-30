@@ -14,12 +14,12 @@ class CreateViewModel extends ChangeNotifier {
   CreateViewModel(){
     getCatFacts();
   }
-
+  Box<CatsFactsObject>? box;
   bool isLoading = false;
   List<CatFacts> factsModel = [];
 
   Future getCatFacts() async {
-    Box box = await Hive.openBox('Box');
+    box = await Hive.openBox('Box');
     isLoading = true;
 
     Response response = await ApiController().getData(url: "cats?tags=cute");
@@ -27,7 +27,7 @@ class CreateViewModel extends ChangeNotifier {
     if(response.statusCode == 200){
       responseJson.forEach((element) {
         CatFacts catFacts = CatFacts.fromJson(element);
-        box.put(catFacts.id, CatsFactsObject(catFacts.id ?? "0", catFacts.tags?[0] ?? "0", catFacts.createdAt ?? "0"));
+        box!.put(catFacts.id, CatsFactsObject(catFacts.id ?? "0", catFacts.tags?[0] ?? "0", catFacts.createdAt ?? "0"));
         factsModel.add(catFacts);
       });
       Utils.showMsg("Database Updated");
@@ -36,5 +36,9 @@ class CreateViewModel extends ChangeNotifier {
     }
     isLoading = false;
     notifyListeners();
+
+    if(Hive.isBoxOpen('Box')){
+      box!.close();
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:task_crud/viewmodels/create_viewmodel.dart';
+import 'package:task_crud/viewmodels/delete_viewmodel.dart';
 import 'package:task_crud/viewmodels/home_viewmodel.dart';
 import 'package:task_crud/viewmodels/read_viewmodel.dart';
 import 'package:task_crud/viewmodels/update_viewmodel.dart';
@@ -41,6 +42,9 @@ class Utils{
     ),
     ChangeNotifierProvider<UpdateViewModel>(
       create: (_) => UpdateViewModel(),
+    ),
+    ChangeNotifierProvider<DeleteViewModel>(
+      create: (_) => DeleteViewModel(),
     ),
   ];
 }

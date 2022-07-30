@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_crud/utils/utils.dart';
 import 'package:task_crud/view/test_create.dart';
+import 'package:task_crud/view/test_delete.dart';
 import 'package:task_crud/view/test_read.dart';
 import 'package:task_crud/view/test_update.dart';
 import 'package:task_crud/viewmodels/home_viewmodel.dart';
@@ -45,7 +46,9 @@ class HomeScreen extends StatelessWidget {
                     Utils.openScreen(context, const TestUpdate());
                   }, child: const Text("UPDATE")),
               ElevatedButton(
-                  onPressed: () {}, child: const Text("DELETE")),
+                  onPressed: () {
+                    Utils.openScreen(context, const TestDelete());
+                  }, child: const Text("DELETE")),
             ],
           ),
         ),

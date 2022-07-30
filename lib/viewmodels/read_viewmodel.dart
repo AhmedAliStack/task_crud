@@ -14,22 +14,22 @@ class ReadViewModel extends ChangeNotifier{
   ReadViewModel() {
     getCatFacts();
   }
-
+  Box<CatsFactsObject>? box;
   bool isLoading = false;
   List<CatFacts> factsModel = [];
 
   Future getCatFacts() async {
-    Box box = await Hive.openBox('Box');
+    box = await Hive.openBox('Box');
     isLoading = true;
-    if(box.isNotEmpty){
-      readFromBox(box);
+    if(box!.isNotEmpty){
+      readFromBox(box!);
     }else{
       Response response = await ApiController().getData(url: "cats?tags=cute");
       final responseJson = jsonDecode(response.body);
       if(response.statusCode == 200){
         responseJson.forEach((element) {
           CatFacts catFacts = CatFacts.fromJson(element);
-          box.put(catFacts.id, CatsFactsObject(catFacts.id ?? "0", catFacts.tags?[0] ?? "0", catFacts.createdAt ?? "0"));
+          box!.put(catFacts.id, CatsFactsObject(catFacts.id ?? "0", catFacts.tags?[0] ?? "0", catFacts.createdAt ?? "0"));
           factsModel.add(catFacts);
         });
         Utils.showMsg("Database Updated");
@@ -46,6 +46,9 @@ class ReadViewModel extends ChangeNotifier{
       factsModel.add(CatFacts(id:object.id,createdAt: object.user,tags: [object.text]));
     }
     Utils.showMsg("Read from LocalDB");
+    if(Hive.isBoxOpen('Box')){
+      box.close();
+    }
     notifyListeners();
   }
 }
