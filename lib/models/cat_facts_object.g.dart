@@ -41,7 +41,7 @@ class CatsFactsObjectAdapter extends TypeAdapter<CatsFactsObject> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CatsFactsObjectAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+          other is CatsFactsObjectAdapter &&
+              runtimeType == other.runtimeType &&
+              typeId == other.typeId;
 }

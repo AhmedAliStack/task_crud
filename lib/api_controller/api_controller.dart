@@ -6,7 +6,7 @@ import '../utils/utils.dart';
 
 class ApiController {
   String? url;
-  final endPoint = "https://cat-fact.herokuapp.com/";
+  final endPoint = "https://cataas.com/api/";
 
   ApiController({this.url});
 

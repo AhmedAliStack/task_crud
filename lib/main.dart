@@ -4,8 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:task_crud/utils/utils.dart';
 import 'package:task_crud/view/home_screen.dart';
-
-import 'models/cat_facts/cat_facts_object.dart';
+import 'models/cat_facts_object.dart';
 
 Future<void> main() async{
   await Hive.initFlutter();
